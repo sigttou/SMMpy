@@ -19,6 +19,10 @@ This is our core, it reads messages and relays them to other servers.
 ### Client
 This script handles the packaging of the message.
 
+### Keys
+Currently all public keys should be placed in the `./keys` folder and be named like:
+`address.pem`
+
 ## Requirements
 ```
 $ pip freeze
@@ -36,7 +40,7 @@ stompclient==0.3.2
 - run `python server.py`
 - use `python client.py`
 
-## TODO 
+## TODO
 * IMP: Usage (average)
 * IMP: Tracker (average)
 * IMP: Support other ports (average)
