@@ -1,7 +1,7 @@
-= SMMpy =
+# SMMpy
 Stomp Mixed Messaging in python
 
-== Setup ==
+## Setup
 - Get an own env for your python project (run in the repo folder)
 ```
 $ virtualenv-2.7 --distribute --no-site-packages env
@@ -9,17 +9,17 @@ $ source env/bin/activate
 (env) $ pip install CoilMQ rsa SimpleAES stomp.py
 ```
 
-== Documentation ==
-=== CoilMQ ===
+## Documentation
+### CoilMQ
 Nothing was changed in the CoilMQ code just make sure you are running it.
 
-=== Server ===
+### Server
 This is our core, it reads messages and relays them to other servers.
 
-=== Client ===
+### Client
 This script handles the packaging of the message.
 
-== Requirements ==
+## Requirements
 ```
 $ pip freeze
 CoilMQ==0.6.1
@@ -31,12 +31,12 @@ stomp.py==4.0.12
 stompclient==0.3.2
 ```
 
-== Usage ==
+## Usage
 - Start `coilmq`
 - run `python server.py`
 - use `python client.py`
 
-== TODO ==
+## TODO 
 * IMP: Usage (average)
 * IMP: Tracker (average)
 * IMP: Support other ports (average)
