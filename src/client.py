@@ -10,6 +10,7 @@ __status__ = "Demo"
 import stomp
 import rsa
 import os
+import sys
 import json
 import base64
 import binascii
@@ -59,14 +60,20 @@ def create_chain(pubservers):
         print(str(i) + ': ' + server)
         i += 1
 
-    receiver = int(input("Where do you want to send it? "))
+    try:
+        receiver = int(input("Where do you want to send it? "))
+    except:
+        print("Give a valid receiver!")
+        sys.exit()
+
     print("Chain starts sending with first server")
     nodes = input("Give server chain splitted with ,: ").split(',')
+    nodes = filter(None, nodes)
 
-    filter(None, nodes)
     if len(nodes) > 0:
         nodes = map(int, nodes)
     else:
+        print("WARN: direct sending!")
         nodes = []
     nodes.append(receiver)
 
