@@ -12,6 +12,7 @@ $ source env/bin/activate
 ## Documentation
 ### CoilMQ
 Nothing was changed in the CoilMQ code just make sure you are running it.
+Every other Stomp server supporting Version 1.0 should work too.
 
 ### Server
 This is our core, it reads messages and relays them to other servers.
@@ -43,5 +44,4 @@ stompclient==0.3.2
 ## TODO
 * IMP: Usage (average)
 * IMP: Tracker (average)
-* IMP: Support other ports (average)
 * IMP: Support STOMP 1.3 (low)
