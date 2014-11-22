@@ -39,13 +39,18 @@ class MixListener(object):
         if message['TO'] == '':
             print(message['FROM'] + ': ' + data)
         else:
-            print('Message relayed')
+            print('Relaying message to: %s' % message['TO'])
             self.to_send.append(data)
             if len(self.to_send) > 3:
                 random.shuffle(self.to_send)
                 for data in self.to_send:
+                    address = message['TO'].split(":")[0]
+                    port = 61613
+                    if len(message['TO'].split(":") == 2):
+                        port = message['TO'].split(":")[1]
+
                     try:
-                        conn = stomp.StompConnection10([(message['TO'], 61613)])
+                        conn = stomp.StompConnection10([(address, port)])
                         conn.start()
                         conn.connect()
                         conn.send(body=data, destination='/queue/to_send')
