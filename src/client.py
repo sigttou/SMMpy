@@ -135,8 +135,35 @@ def send_message(message):
         print("There are Server Problems")
 
 
+def start_tracker():
+    host = input("What SMM tracker do you know?\n")
+
+    request = {}
+    request['TYPE'] = 'REQ'
+    request['FROM'] = LOCAL_NAME
+
+    address = host.split(":")[0]
+    print(address)
+    port = 61613
+    if len(host.split(":")) == 2:
+        port = host.split(":")[1]
+
+    request = json.dumps(request)
+
+    try:
+        conn = stomp.StompConnection10([(address, port)])
+        conn.start()
+        conn.connect()
+        conn.send(body=request, destination='/queue/tracker')
+        conn.disconnect
+    except:
+        print("REMOTE HOST NOT AVAILABLE")
+
+
 def main():
     pubservers = {}
+
+    start_tracker()
 
     text = get_message()
     pubservers = get_servers(pubservers)
