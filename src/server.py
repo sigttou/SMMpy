@@ -46,7 +46,7 @@ class MixListener(object):
                 for data in self.to_send:
                     address = message['TO'].split(":")[0]
                     port = 61613
-                    if len(message['TO'].split(":") == 2):
+                    if len(message['TO'].split(":")) == 2:
                         port = message['TO'].split(":")[1]
 
                     try:
