@@ -24,6 +24,9 @@ This script handles the packaging of the message.
 Currently all public keys should be placed in the `./keys` folder and be named like:
 `address.pem`
 
+### Tracker
+This just fetches info and creates the key files
+
 ## Requirements
 ```
 $ pip freeze
@@ -45,3 +48,4 @@ stompclient==0.3.2
 * IMP: Usage (average)
 * IMP: Tracker (average)
 * IMP: Support STOMP 1.3 (low)
+* IMP: Merge client, server, tracker
