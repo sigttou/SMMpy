@@ -42,6 +42,7 @@ stompclient==0.3.2
 ## Usage
 - Start `coilmq -b 0.0.0.0`
 - run `python server.py`
+- run `python tracker.py`
 - use `python client.py` or `python client.py -t` for using a tracker
 
 ## TODO
