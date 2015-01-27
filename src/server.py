@@ -16,7 +16,7 @@ import base64
 import random
 import sys
 from SimpleAES import SimpleAES
-from settings import STOMP_PORT
+from settings import STOMP_PORT, MAX_QUEUE_SIZE
 
 
 class MixListener(object):
@@ -42,7 +42,7 @@ class MixListener(object):
         else:
             print('Relaying message to: %s' % message['TO'])
             self.to_send.append(data)
-            if len(self.to_send) > 3:
+            if len(self.to_send) > MAX_QUEUE_SIZE:
                 random.shuffle(self.to_send)
                 for data in self.to_send:
                     address = message['TO'].split(":")[0]
