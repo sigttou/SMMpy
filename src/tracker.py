@@ -15,12 +15,10 @@ On the Tracker we will use following messages:
 The used queue is queue/tracker
 """
 
-# import rsa
 import os.path
 import time
 import stomp
 import json
-# import sys
 
 
 KEY_PATH = "./keys/"
