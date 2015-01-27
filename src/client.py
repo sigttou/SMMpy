@@ -60,6 +60,8 @@ def create_chain(pubservers):
 
     try:
         receiver = int(input("Where do you want to send it? "))
+        if(receiver > len(pubservers.keys()) - 1):
+            raise Exception("I am stupid.")
     except:
         print("Give a valid receiver!")
         sys.exit()
@@ -76,6 +78,10 @@ def create_chain(pubservers):
     nodes.append(receiver)
 
     for node in nodes:
+        if(node > len(pubservers.keys()) - 1):
+            print("Invalid number")
+            sys.exit()
+
         print("Adding: " + pubservers.keys()[node])
         chain.append(
             (pubservers.keys()[node],
