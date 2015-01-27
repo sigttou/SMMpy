@@ -16,6 +16,7 @@ import base64
 import random
 import sys
 from SimpleAES import SimpleAES
+from settings import STOMP_PORT
 
 
 class MixListener(object):
@@ -45,7 +46,7 @@ class MixListener(object):
                 random.shuffle(self.to_send)
                 for data in self.to_send:
                     address = message['TO'].split(":")[0]
-                    port = 61613
+                    port = STOMP_PORT
                     if len(message['TO'].split(":")) == 2:
                         port = message['TO'].split(":")[1]
 

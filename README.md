@@ -42,10 +42,11 @@ stompclient==0.3.2
 ## Usage
 - Start `coilmq -b 0.0.0.0`
 - run `python server.py`
-- use `python client.py`
+- use `python client.py` or `python client.py -t` for using a tracker
 
 ## TODO
 * IMP: Usage (average)
-* IMP: Tracker (average)
+~~* IMP: Tracker (average)~~
 * IMP: Support STOMP 1.3 (low)
-* IMP: Merge client, server, tracker
+* IMP: Merge client, server, tracker (low)
+~~* IMP: Config file (low)~~

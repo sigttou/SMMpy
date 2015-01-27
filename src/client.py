@@ -15,9 +15,7 @@ import json
 import base64
 import binascii
 from SimpleAES import SimpleAES
-
-KEY_PATH = "./keys/"
-LOCAL_NAME = "SET_YOUR_NAME"
+from settings import STOMP_PORT, KEY_PATH, LOCAL_NAME
 
 # Fix Python 2.x.
 try:
@@ -143,7 +141,7 @@ def start_tracker():
     request['FROM'] = LOCAL_NAME
 
     address = host.split(":")[0]
-    port = 61613
+    port = STOMP_PORT
     if len(host.split(":")) == 2:
         port = host.split(":")[1]
 
