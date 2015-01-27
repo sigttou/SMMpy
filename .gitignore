@@ -2,3 +2,4 @@ env/
 src/keys/
 src/privkey.pem
 src/pubkey.pem
+*.pyc
