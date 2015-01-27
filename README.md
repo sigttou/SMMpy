@@ -47,7 +47,7 @@ stompclient==0.3.2
 
 ## TODO
 * IMP: Usage (average)
-~~* IMP: Tracker (average)~~
+*~~ IMP: Tracker (average)~~
 * IMP: Support STOMP 1.3 (low)
 * IMP: Merge client, server, tracker (low)
-~~* IMP: Config file (low)~~
+*~~ IMP: Config file (low)~~
