@@ -19,9 +19,7 @@ import os.path
 import time
 import stomp
 import json
-
-
-KEY_PATH = "./keys/"
+from settings import KEY_PATH, STOMP_PORT
 
 
 class MixListener(object):
@@ -50,7 +48,7 @@ class MixListener(object):
             response = json.dumps(response)
 
             address = message['FROM'].split(":")[0]
-            port = 61613
+            port = STOMP_PORT
             if len(message['FROM'].split(":")) == 2:
                 port = message['FROM'].split(":")[1]
 
@@ -65,6 +63,10 @@ class MixListener(object):
 
 
 def main():
+    # Check for KEY_PATH, create if needed
+    if not os.path.exists(KEY_PATH):
+        os.makedirs(KEY_PATH)
+
     # Connect to stomp and fetch messages
     conn = stomp.StompConnection10()
     conn.set_listener('', MixListener())
