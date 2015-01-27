@@ -143,7 +143,6 @@ def start_tracker():
     request['FROM'] = LOCAL_NAME
 
     address = host.split(":")[0]
-    print(address)
     port = 61613
     if len(host.split(":")) == 2:
         port = host.split(":")[1]
@@ -163,7 +162,8 @@ def start_tracker():
 def main():
     pubservers = {}
 
-    start_tracker()
+    if len(sys.argv) > 1:
+        start_tracker()
 
     text = get_message()
     pubservers = get_servers(pubservers)
