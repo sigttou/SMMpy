@@ -32,10 +32,11 @@ def get_message():
     return message
 
 
-def get_servers(pubservers):
+def get_servers():
     """
     Scan the key folder for possible servers
     """
+    pubservers = {}
     for entry in os.listdir(KEY_PATH):
         address = os.path.splitext(entry)[0]
         with open(KEY_PATH + entry) as pubfile:
@@ -164,13 +165,11 @@ def start_tracker():
 
 
 def main():
-    pubservers = {}
-
     if len(sys.argv) > 1:
         start_tracker()
 
     text = get_message()
-    pubservers = get_servers(pubservers)
+    pubservers = get_servers()
     chain = create_chain(pubservers)
 
     message = generate_message(chain, text)
