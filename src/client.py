@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "David Bidner, Rene Höbling and Alexander Wachter"
 __license__ = "BSD 2-Clause"
-__version__ = "rolling"
-__status__ = "Demo"
+__version__ = "1.0.0"
+__status__ = "Released"
 
 # Provides a simple CLI interface to send a message to another server
 
@@ -15,7 +15,7 @@ import json
 import base64
 import binascii
 from SimpleAES import SimpleAES
-from settings import STOMP_PORT, KEY_PATH, LOCAL_NAME
+from settings import STOMP_PORT, KEY_PATH, LOCAL_NAME, QUEUE
 
 # Fix Python 2.x.
 try:
@@ -134,7 +134,7 @@ def send_message(message):
         conn = stomp.StompConnection10()
         conn.start()
         conn.connect()
-        conn.send(body=message, destination='/queue/to_send')
+        conn.send(body=message, destination=QUEUE)
         conn.disconnect
     except:
         print("There are Server Problems")
@@ -158,7 +158,7 @@ def start_tracker():
         conn = stomp.StompConnection10([(address, port)])
         conn.start()
         conn.connect()
-        conn.send(body=request, destination='/queue/tracker')
+        conn.send(body=request, destination=QUEUE)
         conn.disconnect
     except:
         print("REMOTE HOST NOT AVAILABLE")

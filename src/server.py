@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "David Bidner, Rene Höbling and Alexander Wachter"
 __license__ = "BSD 2-Clause"
-__version__ = "rolling"
-__status__ = "Demo"
+__version__ = "1.0.0"
+__status__ = "Released"
 
 # Provides a more or less complex structure for the SMM Network server
 
@@ -16,7 +16,7 @@ import base64
 import random
 import sys
 from SimpleAES import SimpleAES
-from settings import STOMP_PORT, MAX_QUEUE_SIZE
+from settings import STOMP_PORT, MAX_QUEUE_SIZE, QUEUE, KEY_PATH
 
 
 class MixListener(object):
@@ -32,6 +32,43 @@ class MixListener(object):
 
     def on_message(self, headers, message):
         message = json.loads(message)
+
+        # Tracker things:
+        if(message.get('TYPE') == "INFO"):
+            data = message['DATA']
+            for entry in data:
+                with open(KEY_PATH + entry, 'w') as storage:
+                    storage.write(data[entry])
+            return
+
+        if(message.get('TYPE') == "REQ"):
+            info = {}
+            response = {}
+            response['TYPE'] = "INFO"
+
+            for entry in os.listdir(KEY_PATH):
+                with open(KEY_PATH + entry, 'r') as content:
+                    info[entry] = content.read()
+            response['DATA'] = info
+
+            response = json.dumps(response)
+
+            address = message['FROM'].split(":")[0]
+            port = STOMP_PORT
+            if len(message['FROM'].split(":")) == 2:
+                port = message['FROM'].split(":")[1]
+
+            try:
+                conn = stomp.StompConnection10([(address, port)])
+                conn.start()
+                conn.connect()
+                conn.send(body=response, destination=QUEUE)
+                conn.disconnect
+            except:
+                print("REMOTE HOST NOT AVAILABLE")
+            return
+
+        # Any other message
         crypted_key = base64.b64decode(message['KEY'])
         aes_key = rsa.decrypt(crypted_key, self.privkey)
         aes = SimpleAES(aes_key)
@@ -54,7 +91,7 @@ class MixListener(object):
                         conn = stomp.StompConnection10([(address, port)])
                         conn.start()
                         conn.connect()
-                        conn.send(body=data, destination='/queue/to_send')
+                        conn.send(body=data, destination=QUEUE)
                         conn.disconnect
                     except:
                         print("REMOTE HOST NOT AVAILABLE")
@@ -84,7 +121,7 @@ def main():
     conn.set_listener('', MixListener(privkey))
     conn.start()
     conn.connect()
-    conn.subscribe(destination='/queue/to_send', id=1, ack='auto')
+    conn.subscribe(destination=QUEUE, id=1, ack='auto')
 
     # Yes we do this :-)
     while (True):

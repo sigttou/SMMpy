@@ -25,7 +25,7 @@ Currently all public keys should be placed in the `./keys` folder and be named l
 `address.pem`
 
 ### Tracker
-This just fetches info and creates the key files
+This just fetches info and creates the key files (merged into server)
 
 ## Requirements
 ```
@@ -42,12 +42,12 @@ stompclient==0.3.2
 ## Usage
 - start `coilmq -b 0.0.0.0`
 - run `python server.py`
-- run `python tracker.py`
 - use `python client.py` or `python client.py -t` for using a tracker
 
 ## TODO
 * IMP: Usage (average)
 * [DONE] IMP: Tracker (average)
 * IMP: Support STOMP 1.3 (low)
-* IMP: Merge client, server, tracker (low)
+* IMP: Merge client, server (low)
+* [DONE] IMP: Merge server, tracker (low)
 * [DONE] IMP: Config file (low)
