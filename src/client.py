@@ -118,7 +118,7 @@ def generate_message(chain, data):
         aes = SimpleAES(aes_key)
         chipher_data = aes.encrypt(data)
         crypted_key = base64.b64encode(rsa.encrypt(aes_key, pubkey))
-        content['DATA'] = chipher_data
+        content['DATA'] = base64.b64encode(chipher_data)
         content['KEY'] = crypted_key
         data = json.dumps(content)
         i += 1

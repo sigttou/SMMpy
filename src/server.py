@@ -35,7 +35,7 @@ class MixListener(object):
         crypted_key = base64.b64decode(message['KEY'])
         aes_key = rsa.decrypt(crypted_key, self.privkey)
         aes = SimpleAES(aes_key)
-        data = aes.decrypt(message['DATA'])
+        data = aes.decrypt(base64.b64decode(message['DATA']))
 
         if message['TO'] == '':
             print(message['FROM'] + ': ' + data)
