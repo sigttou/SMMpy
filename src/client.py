@@ -60,23 +60,18 @@ def create_chain(pubservers):
         i += 1
 
     try:
-        receiver = int(input("Where do you want to send it? "))
-        if(receiver > len(pubservers.keys()) - 1):
-            raise Exception("I am stupid.")
+        print("Chain starts sending with first server (receiver is last one)")
+        nodes = input("Give server chain splitted with ,: ").split(',')
+        nodes = filter(None, nodes)
+
+        if nodes:
+            nodes = map(int, nodes)
+        else:
+            print("No servers given")
+            sys.exit()
     except:
-        print("Give a valid receiver!")
+        print("Wrong input")
         sys.exit()
-
-    print("Chain starts sending with first server")
-    nodes = input("Give server chain splitted with ,: ").split(',')
-    nodes = filter(None, nodes)
-
-    if len(nodes) > 0:
-        nodes = map(int, nodes)
-    else:
-        print("WARN: direct sending!")
-        nodes = []
-    nodes.append(receiver)
 
     for node in nodes:
         if(node > len(pubservers.keys()) - 1):
