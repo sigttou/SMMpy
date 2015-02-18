@@ -91,7 +91,7 @@ class MixListener(object):
                         conn = stomp.StompConnection10([(address, port)])
                         conn.start()
                         conn.connect()
-                        conn.send(body=data, destination=QUEUE)
+                        conn.send(body=data[0], destination=QUEUE)
                         conn.disconnect
                     except:
                         print("REMOTE HOST NOT AVAILABLE")
